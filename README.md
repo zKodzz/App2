@@ -1,4 +1,4 @@
-# **TICS200: App #2 – Gestión de Proyectos en Java (POO)**
+# **TICS200: App #2 – Gestión Agrícola en Java (POO)**
 
 ## **Profesores**
 - **María Loreto Arriagada**  
@@ -32,7 +32,7 @@
 
 ## 2. Enunciado
 
-Imaginemos que una empresa multinacional necesita un **software de gestión de proyectos**. El objetivo es mantener un registro de los proyectos, las tareas asociadas y los equipos de trabajo. Al iniciar el programa, se leerá un archivo CSV (`proyectos.csv`) que representa el estado inicial del sistema. Al finalizar, todos los cambios se guardarán nuevamente en el mismo archivo.
+Imaginemos que una empresa agrícola necesita un **software de gestión de cultivos**. El objetivo es mantener un registro de los cultivos, parcelas, y actividades de mantenimiento. Al iniciar el programa, se leerá un archivo CSV (`cultivos.csv`) que representa el estado inicial del sistema. Al finalizar, todos los cambios se guardarán nuevamente en el mismo archivo.
 
 ### 2.1 Requerimientos funcionales
 
@@ -40,59 +40,67 @@ El programa debe:
 
 1. Iniciarse desde la consola con:  
    ```bash
-   java App2 proyectos.csv
+   java App2 cultivos.csv
    ```
-   donde App2.java es la clase principal y proyectos.csv el archivo de persistencia.
+   donde App2.java es la clase principal y cultivos.csv el archivo de persistencia.
 
 2. Presentar un menú principal en consola, que permita acceder a las siguientes funciones:
 
-   - **Gestión de Proyectos**
-     - Listar proyectos existentes.
-     - Crear un nuevo proyecto.
-     - Eliminar un proyecto (solo si no tiene tareas activas).
-     - Editar la información básica de un proyecto (nombre, descripción, fecha de inicio, etc.).
+   - **Gestión de Cultivos**
+     - Listar cultivos existentes.
+     - Crear un nuevo cultivo.
+     - Eliminar un cultivo (solo si no tiene actividades pendientes).
+     - Editar la información básica de un cultivo (nombre, variedad, fecha de siembra, etc.).
 
-   - **Gestión de Tareas**
-     - Listar tareas de un proyecto.
-     - Agregar una tarea a un proyecto.
-     - Eliminar una tarea (solo si no tiene subtareas o colaboradores asignados).
-     - Editar una tarea (cambiar nombre, responsable, fecha estimada, etc.).
-     - Mover una tarea de un proyecto a otro.
+   - **Gestión de Parcelas**
+     - Listar parcelas con sus cultivos.
+     - Agregar una parcela.
+     - Eliminar una parcela (solo si no tiene cultivos activos).
+     - Editar una parcela (cambiar tamaño, ubicación, etc.).
+     - Asignar un cultivo a una parcela.
 
-   - **Gestión de Equipos y Colaboradores**
-     - Agregar un colaborador a un proyecto (o a una tarea específica).
-     - Eliminar un colaborador (solo si no está asignado a tareas activas).
-     - Cambiar el rol de un colaborador dentro de una tarea.
+   - **Gestión de Actividades**
+     - Registrar actividad (riego, fertilización, cosecha, etc.) para un cultivo.
+     - Listar actividades por cultivo.
+     - Eliminar actividad.
+     - Marcar actividad como completada.
 
    - **Búsqueda/Reporte**
-     - Buscar una tarea o proyecto por nombre (mostrar datos relevantes).
-     - Reporte de proyectos activos, finalizados, o en riesgo (simplemente un campo de estado que se podría indicar en cada proyecto).
+     - Buscar cultivos por nombre o variedad (mostrar datos relevantes).
+     - Reporte de cultivos activos, cosechados, o en riesgo.
 
    - **Salir**
-     - Guardar toda la información en proyectos.csv y finalizar el programa.
+     - Guardar toda la información en cultivos.csv y finalizar el programa.
 
 ### 2.2 Supuestos y detalles
 
-- Cada proyecto puede tener múltiples tareas, y cada tarea puede tener subtareas (opcional si desean implementar más profundidad).
-- Al menos una clase abstracta o interfaz debe emplearse para representar algún concepto genérico (por ejemplo, "ElementoGestión" que represente algo con nombre, fecha y estado, pudiendo ser Proyecto o Tarea).
-- Se sugiere utilizar colecciones de Java (ArrayList, HashMap, List, etc.) para administrar proyectos, tareas, colaboradores, etc.
+- Cada parcela puede tener múltiples cultivos.
+- Al menos una clase abstracta o interfaz debe emplearse para representar algún concepto genérico (por ejemplo, "ElementoAgrícola" que represente algo con nombre, fecha y estado).
+- Se sugiere utilizar colecciones de Java (ArrayList, HashMap, List, etc.) para administrar cultivos, parcelas, actividades, etc.
 - El usuario ingresa "información válida" (no se requiere validación exhaustiva).
 - No hay campos vacíos en el CSV al iniciar.
 - Se evaluará el uso de herencia, encapsulamiento y paquetes para organizar las clases (por ejemplo, un paquete models, otro services, etc.).
 
 ### 2.3 Formato del CSV
 
-Un ejemplo de fila podría ser (en un formato indicativo):
+El formato del CSV será sencillo y consistente, todas las líneas tendrán la misma estructura:
 
 ```
-Proyecto, "Sistema Contable", "Actualización de la plataforma contable", "2023-03-01", "ACTIVO"
-Tarea, "Implementar módulo de facturación", "John Doe", "2023-03-15", "Sistema Contable"
-Tarea, "Revisión de seguridad", "Jane Smith", "2023-04-10", "Sistema Contable"
-Proyecto, "Portal de Recursos Humanos", "Portal interno para gestión de RRHH", "2023-02-10", "EN RIESGO"
-...
+Cultivo,"Maíz","Variedad Dulce",32.5,"PARCELA-A01","2023-03-01","ACTIVO",["RIEGO:2023-03-10","FERTILIZACION:2023-03-20"]
+Cultivo,"Trigo","Variedad Premium",45.2,"PARCELA-B03","2023-02-15","ACTIVO",["RIEGO:2023-02-25","COSECHA:2023-06-15"]
+Cultivo,"Tomate","Cherry",10.0,"PARCELA-C02","2023-04-05","EN_RIESGO",["FUMIGACION:2023-04-20"]
+Cultivo,"Lechuga","Romana",8.5,"PARCELA-A02","2023-03-10","COSECHADO",["RIEGO:2023-03-20","COSECHA:2023-05-01"]
 ```
 
-Cada fila comienza con el tipo (Proyecto o Tarea), seguido de los datos correspondientes. Nota: Ustedes pueden definir exactamente el formato que más les convenga, mientras sea coherente con la lectura y escritura posterior.
+Cada línea contiene:
+- Tipo de registro (siempre "Cultivo")
+- Nombre del cultivo
+- Variedad
+- Superficie (hectáreas)
+- Código de parcela
+- Fecha de siembra
+- Estado (ACTIVO, EN_RIESGO, COSECHADO)
+- Lista de actividades con fechas (formato JSON simple)
 
 ## 3. Nuevos Requerimientos y Detalles de la Entrega
 
@@ -106,16 +114,16 @@ Cada fila comienza con el tipo (Proyecto o Tarea), seguido de los datos correspo
 
 Deben entregar un diagrama de clases que represente su solución:
 
-- Cardinalidades (ej. un proyecto tiene N tareas, una tarea tiene 1 responsable, etc.)
+- Cardinalidades (ej. una parcela tiene N cultivos, un cultivo tiene M actividades, etc.)
 - Herencia (si usan clases que extiendan de alguna clase base)
 - Interfaces (si las usan)
-- Composición o agregación (por ejemplo, un proyecto contiene un conjunto de tareas).
+- Composición o agregación (por ejemplo, una parcela contiene un conjunto de cultivos).
 
 Se evaluará en particular el uso correcto de:
 
 - Paquetes (organizar las clases en paquetes coherentes).
 - Modificadores de Acceso (privado, público, protegido) y encapsulamiento.
-- Herencia (si se crea una superclase ElementoGestion o un patrón similar).
+- Herencia (si se crea una superclase ElementoAgricola o un patrón similar).
 - Colecciones (ArrayList, List, Map, etc.).
 - Interfaces/Clases abstractas (al menos un uso sensato).
 
@@ -154,16 +162,16 @@ Se evaluará en particular el uso correcto de:
 - Desde la raíz del proyecto, se debe poder compilar (por ejemplo, javac App2.java u otro comando, dependiendo de la estructura).
 - Luego, ejecutar:
   ```bash
-  java App2 proyectos.csv
+  java App2 cultivos.csv
   ```
-- El programa mostrará un menú que permita realizar las acciones mencionadas (crear proyecto, agregar tarea, buscar, etc.).
-- Al salir, se guardarán los cambios en proyectos.csv.
+- El programa mostrará un menú que permita realizar las acciones mencionadas (crear cultivo, registrar actividad, buscar, etc.).
+- Al salir, se guardarán los cambios en cultivos.csv.
 
 ## 5. Rúbrica de Evaluación
 
 | Criterio | Peso | Descripción |
 |----------|------|-------------|
-| 1. Funcionamiento general | 30% | <ul><li>El proyecto compila y se ejecuta correctamente.</li><li>Menús y submenús funcionan sin errores ni excepciones no controladas.</li><li>Guardado y lectura de proyectos.csv se realizan de forma coherente.</li></ul> |
+| 1. Funcionamiento general | 30% | <ul><li>El proyecto compila y se ejecuta correctamente.</li><li>Menús y submenús funcionan sin errores ni excepciones no controladas.</li><li>Guardado y lectura de cultivos.csv se realizan de forma coherente.</li></ul> |
 | 2. Paradigma Orientado a Objetos | 30% | <ul><li>Uso adecuado de clases, encapsulamiento, herencia, interfaces y colecciones.</li><li>Organización en paquetes clara y lógica.</li><li>Aplicación de principios de OOP (mínima duplicación de código, coherencia en la jerarquía de clases, etc.).</li></ul> |
 | 3. Arquitectura y diagrama de clases | 15% | <ul><li>Diagrama de clases con cardinalidades y relaciones (herencia, composición, etc.).</li><li>Documentación que aclare el rol de cada clase/paquete.</li></ul> |
 | 4. Informe de diseño y reflexiones finales | 15% | <ul><li><strong>Informe de diseño</strong>: explica la arquitectura, justifica las decisiones (7%).</li><li><strong>Reflexiones</strong>: aprendizajes, desafíos, etc. (5%).</li><li><strong>Uso de IA</strong>: transparencia y validación (3%).</li></ul> |
@@ -187,18 +195,18 @@ cd App2
 javac src/*.java
 
 # (3) Ejecutar
-java src/App2 proyectos.csv
+java src/App2 cultivos.csv
 ```
 
 Se mostrará un menú en consola que permitirá:
-- Listar proyectos
-- Crear/editar/eliminar un proyecto
-- Agregar/quitar tareas
-- Asignar colaboradores
-- Buscar tareas/proyectos
+- Listar cultivos
+- Crear/editar/eliminar un cultivo
+- Agregar/editar parcelas
+- Registrar actividades
+- Buscar cultivos/parcelas
 - etc.
 
-Al seleccionar "Salir", se guardarán los cambios en proyectos.csv.
+Al seleccionar "Salir", se guardarán los cambios en cultivos.csv.
 
 ## 7. Conclusión
 
