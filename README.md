@@ -106,11 +106,11 @@ Cada línea contiene:
 
 - **Lenguaje**: Java (versión 16 o superior, u OpenJDK 16+).
 - **Grupos**: 4 o 5 personas (no se admitirán grupos de 6).
-- **Fecha de entrega**: Miércoles 23 de Mayo a las 23:59.
+- **Fecha de entrega**: Miércoles 3 de Mayo a las 23:59.
 - Por cada día de atraso se descuenta 1 punto, comenzando a las 00:00 del día siguiente.
   - Ejemplo: si entregan a las 00:00 del día siguiente, la nota máxima es 6.0.
 
-### 3.1 Diagrama de Clases
+### Opcional: Diagrama de Clases
 
 Deben entregar un diagrama de clases que represente su solución:
 
@@ -131,14 +131,14 @@ Se evaluará en particular el uso correcto de:
 
 ### Fork del repositorio base
 
-- Deberán forkear el repositorio: App2 en GitHub (o el que indique el curso).
-- En ese repositorio forkeado, agregar a todos los integrantes del grupo como colaboradores.
+- Deberán crearse un repositorio para el grupo que se llame App2 en GitHub (o el que indique el curso).
+- En ese repositorio, agregar a todos los integrantes del grupo como colaboradores, y dar acceso a dicho repositorio a los profes. 
 
 ### Commits balanceados y Pull Request
 
 - Cada integrante del grupo debe tener aproximadamente la misma cantidad de commits.
 - Se evaluará la participación equitativa a través del historial de commits.
-- La entrega oficial será vía Pull Request hacia el repositorio original (o como indique la asignatura).
+- La entrega oficial por medio de WEBC indicando la URL del repo (o como indique la asignatura).
 
 ### Estructura del repositorio
 
