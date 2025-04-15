@@ -106,7 +106,7 @@ Cada línea contiene:
 
 - **Lenguaje**: Java (versión 16 o superior, u OpenJDK 16+).
 - **Grupos**: 4 o 5 personas (no se admitirán grupos de 6).
-- **Fecha de entrega**: Miércoles 3 de Mayo a las 23:59.
+- **Fecha de entrega**: Sábado 3 de Mayo a las 23:59.
 - Por cada día de atraso se descuenta 1 punto, comenzando a las 00:00 del día siguiente.
   - Ejemplo: si entregan a las 00:00 del día siguiente, la nota máxima es 6.0.
 
@@ -129,10 +129,11 @@ Se evaluará en particular el uso correcto de:
 
 ## 4. Formato de Entrega (vía repositorio GitHub)
 
-### Fork del repositorio base
+### Repositorio de trabajo
 
-- Deberán crearse un repositorio para el grupo que se llame App2 en GitHub (o el que indique el curso).
-- En ese repositorio, agregar a todos los integrantes del grupo como colaboradores, y dar acceso a dicho repositorio a los profes. 
+- Deberán crear un repositorio para el grupo que se llame App2 en GitHub (o el que indique el curso).
+- Asegurarse que el repositorio sea privado al grupo de trabajo.
+- En ese repositorio, agregar a todos los integrantes del grupo como colaboradores, y dar acceso a dicho repositorio al profesor y al ayudante.
 
 ### Commits balanceados y Pull Request
 
