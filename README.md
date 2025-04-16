@@ -183,6 +183,7 @@ Se evaluará en particular el uso correcto de:
 - **Atrasos**: Resta 1 punto al máximo posible por día de atraso (comenzando a las 00:00 del día siguiente).
 - **Grupos con más de 5 integrantes**: penalización (no se admite grupo de 6).
 - **Grupos con menos integrantes**: puede existir un pequeño bonus, según políticas de la asignatura.
+- **Arquitectura y diagrama de clases**: Bono 10%, Diagrama de clases con cardinalidades y relaciones (herencia, composición, etc.).
 
 ## 6. Ejemplo de Uso
 
