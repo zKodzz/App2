@@ -54,8 +54,12 @@ Se utilizan interfaces para definir contratos que las clases implementan, promov
 **Relaciones entre clases**  
 - **Composición:** Una Parcela contiene una colección de Cultivos, y cada Cultivo contiene una colección de Actividades, lo que implica una relación fuerte donde la existencia de los objetos contenidos depende del contenedor.  
 - **Agregación:** GestorActividades mantiene referencias a las actividades que gestiona, pero no controla su ciclo de vida, indicando una relación más débil.
-![Diagrama de Clases]
-http://www.plantuml.com/plantuml/png/ZP7HQi8m58RlynI7tbWd2hijGnG7Op36q2SufiVkZ3GfIUg5Rk--cCMkfS9srtpz3z-VavNpQ7rRAp61ZK973XhBMdA3YfoG0JbuGoj98Pm5m1ouX09O-tZGfjvR2c3dmrWLcMoLvwDnWRwmym-Rd_DI0Cm0AqiLsiHoMK3wd8RuqN0flaJIfX-tj9uRCvIY35akiQJEkxwYWRcZEHRG7SRsxbVoZvK7akyOq2DwYY2ufUL6ij7zv0mieU8JsdoiUIBdZLttsf__UHzfwQ_Rn1mfhbdterp6JVRBJ61B2Y_DoOdhUsVt6TpDvv2zPjrZ522DzaoQH4A3M2Vf1qTtZ2FcnaWLag43NWhj6EAuWrRZfI_P0vuWfm-g6sMc8Y59yBobYfstk5S4vxJoI8Ox_rKj5f_BmPXOaIxRMdq3
+## Diagrama de Clases UML
+
+A continuación se muestra el diagrama de clases que representa la arquitectura del sistema:
+
+![Diagrama de Clases UML](http://www.plantuml.com/plantuml/png/ZP7HQi8m58RlynI7tbWd2hijGnG7Op36q2SufiVkZ3GfIUg5Rk--cCMkfS9srtpz3z-VavNpQ7rRAp61ZK973XhBMdA3YfoG0JbuGoj98Pm5m1ouX09O-tZGfjvR2c3dmrWLcMoLvwDnWRwmym-Rd_DI0Cm0AqiLsiHoMK3wd8RuqN0flaJIfX-tj9uRCvIY35akiQJEkxwYWRcZEHRG7SRsxbVoZvK7akyOq2DwYY2ufUL6ij7zv0mieU8JsdoiUIBdZLttsf__UHzfwQ_Rn1mfhbdterp6JVRBJ61B2Y_DoOdhUsVt6TpDvv2zPjrZ522DzaoQH4A3M2Vf1qTtZ2FcnaWLag43NWhj6EAuWrRZfI_P0vuWfm-g6sMc8Y59yBobYfstk5S4vxJoI8Ox_rKj5f_BmPXOaIxRMdq3)
+
 ---
 
 ### 1.2 Justificación del uso de colecciones y patrones de diseño
