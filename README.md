@@ -1,215 +1,151 @@
 # **TICS200: App #2 – Gestión Agrícola en Java (POO)**
 
-## **Profesores**
-- **María Loreto Arriagada**  
-  loreto.arriagada.v@edu.uai.cl
+Compilación y ejecución
 
-- **Paulina González**  
-  paulina.gonzalez.p@edu.uai.cl
+Desde la raíz del proyecto, se debe poder compilar (por ejemplo, javac App2.java u otro comando, dependiendo de la estructura).
+Luego, ejecutar:
+**java App2 cultivos.csv**
+El programa mostrará un menú que permita realizar las acciones mencionadas (crear cultivo, registrar actividad, buscar, etc.).
+Al salir, se guardarán los cambios en cultivos.csv.
 
-- **Justo Vargas**  
-  justo.vargas@edu.uai.cl
-
-## **Ayudante**
-- **Diego Duhalde**  
-  dduhalde@alumnos.uai.cl
+# Informe de Diseño y Justificación de la Solución  
+**Tarea 2: Gestión Agrícola en Java (POO)**  
+**TICS 200**  
 
 ---
 
-## 1. Objetivos
+## Alumnos  
+- Simon Belmar  
+- Lucas Molina  
+- Martina Uribe  
 
-1. **Estructurar** un programa en Java siguiendo principios de la **Programación Orientada a Objetos (POO)**:  
-   - Herencia  
-   - Encapsulamiento  
-   - Paquetes  
-   - Composición  
-   - Interfaces  
-   - Abstracción  
-2. **Persistir datos** a un archivo CSV, manejando lectura y escritura de información.  
-3. Practicar **herramientas de apoyo** a la programación: GIT (fork, pull requests, commits balanceados), debuggers, etc.
+**Sección:** 1  
+**Profesor:** Maria Loreto Arriagada  
+**Fecha:** 03 de Mayo del 2025  
 
 ---
 
-## 2. Enunciado
+## 1. Informe de diseño
 
-Imaginemos que una empresa agrícola necesita un **software de gestión de cultivos**. El objetivo es mantener un registro de los cultivos, parcelas, y actividades de mantenimiento. Al iniciar el programa, se leerá un archivo CSV (`cultivos.csv`) que representa el estado inicial del sistema. Al finalizar, todos los cambios se guardarán nuevamente en el mismo archivo.
+### 1.1 Arquitectura (clases, paquetes, herencia, etc.)
 
-### 2.1 Requerimientos funcionales
+La arquitectura del sistema se fundamenta en una estructura orientada a objetos organizada y modular, donde las clases, paquetes, herencia e interfaces definen la forma en que los componentes se agrupan, relacionan y comunican para cumplir con los objetivos funcionales y no funcionales.
 
-El programa debe:
+**Clases**  
+El sistema está diseñado con un enfoque orientado a objetos, donde las clases representan las entidades principales del dominio agrícola. Por ejemplo:  
+- **GestorActividades:** Clase central que maneja la creación, actualización, eliminación y consulta de actividades relacionadas con cultivos.  
+- **Actividad:** Modela cada tarea agrícola con atributos como tipo, fecha y descripción.  
+- **Cultivo:** Representa un cultivo específico dentro de una parcela.  
+- **Parcela:** Contiene múltiples cultivos, reflejando la composición del sistema.  
 
-1. Iniciarse desde la consola con:  
-   ```bash
-   java App2 cultivos.csv
-   ```
-   donde App2.java es la clase principal y cultivos.csv el archivo de persistencia.
+Cada clase encapsula sus datos y comportamientos, respetando el principio de encapsulación para proteger el estado interno y exponer sólo métodos controlados.
 
-2. Presentar un menú principal en consola, que permita acceder a las siguientes funciones:
+**Paquetes**  
+El código está organizado en paquetes que agrupan clases con responsabilidades similares, por ejemplo:  
+- `services`: Contiene clases como GestorActividades que implementan la lógica de negocio para la gestión de actividades.  
+- Otros paquetes organizan modelos de datos y utilidades, mejorando la modularidad y facilitando el mantenimiento y la navegación del código.
 
-   - **Gestión de Cultivos**
-     - Listar cultivos existentes.
-     - Crear un nuevo cultivo.
-     - Eliminar un cultivo (solo si no tiene actividades pendientes).
-     - Editar la información básica de un cultivo (nombre, variedad, fecha de siembra, etc.).
+**Herencia**  
+Actualmente, el código no implementa jerarquías de herencia explícitas, pero la arquitectura es extensible para permitir crear subclases especializadas, por ejemplo, diferentes tipos de actividades agrícolas que hereden de una clase base `Actividad`. Esto favorece la reutilización y la extensión futura del sistema.
 
-   - **Gestión de Parcelas**
-     - Listar parcelas con sus cultivos.
-     - Agregar una parcela.
-     - Eliminar una parcela (solo si no tiene cultivos activos).
-     - Editar una parcela (cambiar tamaño, ubicación, etc.).
-     - Asignar un cultivo a una parcela.
+**Interfaces**  
+Se utilizan interfaces para definir contratos que las clases implementan, promoviendo la abstracción y flexibilidad, y permitiendo un diseño desacoplado y extensible.
 
-   - **Gestión de Actividades**
-     - Registrar actividad (riego, fertilización, cosecha, etc.) para un cultivo.
-     - Listar actividades por cultivo.
-     - Eliminar actividad.
-     - Marcar actividad como completada.
+**Relaciones entre clases**  
+- **Composición:** Una Parcela contiene una colección de Cultivos, y cada Cultivo contiene una colección de Actividades, lo que implica una relación fuerte donde la existencia de los objetos contenidos depende del contenedor.  
+- **Agregación:** GestorActividades mantiene referencias a las actividades que gestiona, pero no controla su ciclo de vida, indicando una relación más débil.
+## Diagrama de Clases UML
 
-   - **Búsqueda/Reporte**
-     - Buscar cultivos por nombre o variedad (mostrar datos relevantes).
-     - Reporte de cultivos activos, cosechados, o en riesgo.
+A continuación se muestra el diagrama de clases que representa la arquitectura del sistema:
 
-   - **Salir**
-     - Guardar toda la información en cultivos.csv y finalizar el programa.
+![Diagrama de Clases UML](http://www.plantuml.com/plantuml/png/ZP7HQi8m58RlynI7tbWd2hijGnG7Op36q2SufiVkZ3GfIUg5Rk--cCMkfS9srtpz3z-VavNpQ7rRAp61ZK973XhBMdA3YfoG0JbuGoj98Pm5m1ouX09O-tZGfjvR2c3dmrWLcMoLvwDnWRwmym-Rd_DI0Cm0AqiLsiHoMK3wd8RuqN0flaJIfX-tj9uRCvIY35akiQJEkxwYWRcZEHRG7SRsxbVoZvK7akyOq2DwYY2ufUL6ij7zv0mieU8JsdoiUIBdZLttsf__UHzfwQ_Rn1mfhbdterp6JVRBJ61B2Y_DoOdhUsVt6TpDvv2zPjrZ522DzaoQH4A3M2Vf1qTtZ2FcnaWLag43NWhj6EAuWrRZfI_P0vuWfm-g6sMc8Y59yBobYfstk5S4vxJoI8Ox_rKj5f_BmPXOaIxRMdq3)
 
-### 2.2 Supuestos y detalles
+| Clase principal      | Relación  | Clase relacionada | Tipo de relación | Cardinalidad |
+|----------------------|-----------|-------------------|------------------|--------------|
+| Parcela              | contiene  | Cultivo           | Composición      | 1-N          |
+| Cultivo              | contiene  | Actividad         | Composición      | 1-N          |
+| GestorActividades    | gestiona  | Actividad         | Agregación       | N            |
 
-- Cada parcela puede tener múltiples cultivos.
-- Al menos una clase abstracta o interfaz debe emplearse para representar algún concepto genérico (por ejemplo, "ElementoAgrícola" que represente algo con nombre, fecha y estado).
-- Se sugiere utilizar colecciones de Java (ArrayList, HashMap, List, etc.) para administrar cultivos, parcelas, actividades, etc.
-- El usuario ingresa "información válida" (no se requiere validación exhaustiva).
-- No hay campos vacíos en el CSV al iniciar.
-- Se evaluará el uso de herencia, encapsulamiento y paquetes para organizar las clases (por ejemplo, un paquete models, otro services, etc.).
+---
 
-### 2.3 Formato del CSV
+### 1.2 Justificación del uso de colecciones y patrones de diseño
 
-El formato del CSV será sencillo y consistente, todas las líneas tendrán la misma estructura:
+**Uso de colecciones**  
+Se utilizan colecciones (como `List` y `Map`) para manejar grupos dinámicos de objetos relacionados, por ejemplo, listas de actividades dentro de un cultivo o cultivos dentro de una parcela. Las colecciones permiten:  
+- Almacenamiento flexible sin tamaño fijo.  
+- Operaciones eficientes de iteración, búsqueda y ordenamiento.  
+- Mejor claridad y mantenimiento del código.
 
-```
-Cultivo,"Maíz","Variedad Dulce",32.5,"PARCELA-A01","2023-03-01","ACTIVO",["RIEGO:2023-03-10","FERTILIZACION:2023-03-20"]
-Cultivo,"Trigo","Variedad Premium",45.2,"PARCELA-B03","2023-02-15","ACTIVO",["RIEGO:2023-02-25","COSECHA:2023-06-15"]
-Cultivo,"Tomate","Cherry",10.0,"PARCELA-C02","2023-04-05","EN_RIESGO",["FUMIGACION:2023-04-20"]
-Cultivo,"Lechuga","Romana",8.5,"PARCELA-A02","2023-03-10","COSECHADO",["RIEGO:2023-03-20","COSECHA:2023-05-01"]
-```
+**Patrones de diseño**  
+Aunque no se menciona un patrón de diseño formal, la arquitectura sigue principios como:  
+- Responsabilidad única: Cada clase tiene funciones claras y delimitadas.  
+- Encapsulación: Protección del estado interno.  
+- Modularidad: Separación en paquetes y clases con responsabilidades específicas.  
+- Posible uso futuro de patrones como Factory o Strategy para extender la creación o comportamiento de actividades.
 
-Cada línea contiene:
-- Tipo de registro (siempre "Cultivo")
-- Nombre del cultivo
-- Variedad
-- Superficie (hectáreas)
-- Código de parcela
-- Fecha de siembra
-- Estado (ACTIVO, EN_RIESGO, COSECHADO)
-- Lista de actividades con fechas (formato JSON simple)
+---
 
-## 3. Nuevos Requerimientos y Detalles de la Entrega
+### 1.3 Manejo de modificadores de acceso
 
-- **Lenguaje**: Java (versión 16 o superior, u OpenJDK 16+).
-- **Grupos**: 4 o 5 personas (no se admitirán grupos de 6).
-- **Fecha de entrega**: Sábado 3 de Mayo a las 23:59.
-- Por cada día de atraso se descuenta 1 punto, comenzando a las 00:00 del día siguiente.
-  - Ejemplo: si entregan a las 00:00 del día siguiente, la nota máxima es 6.0.
+El manejo de modificadores de acceso sigue las buenas prácticas de encapsulamiento propias de Java, utilizando principalmente los modificadores `private`, `public` y el acceso por defecto para controlar la visibilidad y protección de los atributos y métodos, limitando la visibilidad de los datos y exponiendo solo las operaciones necesarias para la interacción con otras clases.
 
-### Opcional: Diagrama de Clases
+- **private:** Para atributos internos que no deben ser accesibles desde fuera de la clase, como listas de actividades o datos internos de `GestorActividades`.  
+- **public:** Para métodos que forman la interfaz pública de la clase, permitiendo la interacción con otras partes del sistema (ej. métodos para crear, actualizar o eliminar actividades).  
+- **Acceso por defecto (package-private):** Para miembros que deben ser visibles sólo dentro del mismo paquete, facilitando la colaboración entre clases relacionadas sin exponerlas globalmente.
 
-Deben entregar un diagrama de clases que represente su solución:
+Este control de acceso asegura que el estado interno de las clases esté protegido y que la interacción con ellas se realice únicamente a través de métodos definidos, promoviendo la integridad de los datos y facilitando el mantenimiento del código.
 
-- Cardinalidades (ej. una parcela tiene N cultivos, un cultivo tiene M actividades, etc.)
-- Herencia (si usan clases que extiendan de alguna clase base)
-- Interfaces (si las usan)
-- Composición o agregación (por ejemplo, una parcela contiene un conjunto de cultivos).
+Además, el código no muestra uso de modificadores `protected` ni herencia directa en la clase `GestorActividades`, pero la estructura permite extender funcionalidades mediante herencia o implementación de interfaces si se requiere en futuras ampliaciones.
 
-Se evaluará en particular el uso correcto de:
+---
 
-- Paquetes (organizar las clases en paquetes coherentes).
-- Modificadores de Acceso (privado, público, protegido) y encapsulamiento.
-- Herencia (si se crea una superclase ElementoAgricola o un patrón similar).
-- Colecciones (ArrayList, List, Map, etc.).
-- Interfaces/Clases abstractas (al menos un uso sensato).
+## 2. Reflexiones finales / autoevaluación
 
-## 4. Formato de Entrega (vía repositorio GitHub)
+### 2.1 ¿Qué fue lo más desafiante de implementar en POO?
 
-### Repositorio de trabajo
+Lo más desafiante de implementar en programación orientada a objetos (POO) suele ser el cambio de paradigma, ya que implica pasar de una forma de pensar procedimental a una basada en objetos que combinan datos y comportamientos en una sola unidad. Este cambio mental requiere entender cómo modelar el problema real en clases, objetos, y sus relaciones.
 
-- Deberán crear un repositorio para el grupo que se llame App2 en GitHub (o el que indique el curso).
-- Asegurarse que el repositorio sea privado al grupo de trabajo.
-- En ese repositorio, agregar a todos los integrantes del grupo como colaboradores, y dar acceso a dicho repositorio al profesor y al ayudante.
+Además, un reto importante es el diseño adecuado de la herencia. La herencia puede generar jerarquías rígidas y acoplamientos excesivos entre clases, lo que dificulta la evolución y mantenimiento del sistema. Cambios en una clase base pueden afectar inesperadamente a todas las clases derivadas, provocando fragilidad y problemas de reutilización si no se diseña bien.
 
-### Commits balanceados y Pull Request
+---
 
-- Cada integrante del grupo debe tener aproximadamente la misma cantidad de commits.
-- Se evaluará la participación equitativa a través del historial de commits.
-- La entrega oficial por medio de WEBC indicando la URL del repo (o como indique la asignatura).
+### 2.2 ¿Cómo controlaron la lectura y escritura de CSV?
 
-### Estructura del repositorio
+En la tarea, la lectura y escritura de archivos CSV se gestionan mediante una implementación personalizada en la clase `CsvService`, que permite manejar cultivos y sus actividades asociadas de forma estructurada. Para la lectura, se utiliza `Files.readAllLines()` para cargar el archivo completo, filtrando y procesando solo las líneas relevantes. Se emplea una expresión regular que considera comillas para separar correctamente los campos, incluso si contienen comas internas. Las actividades se extraen mediante expresiones regulares y se asocian a cada cultivo.
 
-- Código fuente en Java, organizado en paquetes (models, services, ui, etc.).
-- Diagrama de clases (en formato imagen/PDF).
-- Informe de diseño (PDF o Markdown) con:
-  - Arquitectura (clases, paquetes, herencia, etc.).
-  - Justificación del uso de colecciones y patrones de diseño (si aplican).
-  - Manejo de modificadores de acceso.
-  - Reflexiones finales / autoevaluación:
-    - ¿Qué fue lo más desafiante de implementar en POO?
-    - ¿Cómo controlaron la lectura y escritura de CSV?
-    - ¿Qué aprendizajes surgieron del proyecto?
-  - Explicación de uso de IA (si aplica):
-    - ¿Qué tipo de ayuda proporcionó la herramienta?
-    - ¿Cómo validaron o contrastaron las sugerencias?
-- README explicando cómo compilar/ejecutar el programa, con info de cada integrante (nombre, correo, etc.).
+Para la escritura, se usa un `BufferedWriter` que formatea cada cultivo y sus actividades en líneas CSV, utilizando streams para convertir las listas en cadenas delimitadas adecuadamente. Este enfoque brinda control total sobre el formato, maneja correctamente comillas y separadores, y mejora la modularidad al centralizar la funcionalidad en una clase dedicada.
 
-### Compilación y ejecución
+En resumen, esta solución personalizada asegura un manejo preciso y eficiente de archivos CSV con estructuras complejas, garantizando la integridad y correcta interpretación de los datos.
 
-- Desde la raíz del proyecto, se debe poder compilar (por ejemplo, javac App2.java u otro comando, dependiendo de la estructura).
-- Luego, ejecutar:
-  ```bash
-  java App2 cultivos.csv
-  ```
-- El programa mostrará un menú que permita realizar las acciones mencionadas (crear cultivo, registrar actividad, buscar, etc.).
-- Al salir, se guardarán los cambios en cultivos.csv.
+---
 
-## 5. Rúbrica de Evaluación
+### 2.3 ¿Qué aprendizajes surgieron del proyecto?
 
-| Criterio | Peso | Descripción |
-|----------|------|-------------|
-| 1. Funcionamiento general | 30% | <ul><li>El proyecto compila y se ejecuta correctamente.</li><li>Menús y submenús funcionan sin errores ni excepciones no controladas.</li><li>Guardado y lectura de cultivos.csv se realizan de forma coherente.</li></ul> |
-| 2. Paradigma Orientado a Objetos | 30% | <ul><li>Uso adecuado de clases, encapsulamiento, herencia, interfaces y colecciones.</li><li>Organización en paquetes clara y lógica.</li><li>Aplicación de principios de OOP (mínima duplicación de código, coherencia en la jerarquía de clases, etc.).</li></ul> |
-| 3. Informe de diseño y reflexiones finales | 10% | <ul><li><strong>Informe de diseño</strong>: explica la arquitectura, justifica las decisiones (7%).</li><li><strong>Reflexiones</strong>: aprendizajes, desafíos, etc. (5%).</li><li><strong>Uso de IA</strong>: transparencia y validación (3%).</li></ul> |
-| 4. Uso de Git (commits y pull request) / Organización del repositorio/Presentación | 20% | <ul><li>Commits equilibrados entre integrantes (aporte individual visible).</li><li>Estructura del repositorio clara, con README que indique cómo compilar/ejecutar.</li></ul> |
-| 5. Presentación | 10% | <ul><li>Presentar en clases la solución la app</li><li>Presentar la app funcionando.</li></ul> |
-| **Total** | **100%** |  |
+A lo largo del avance del proyecto, pudimos aprender a aplicar de forma práctica los principios de la programación orientada a objetos, como encapsulamiento, modularidad y responsabilidad única.
 
-### Penalizaciones y Bonus
+Asimismo, comprendimos lo importante que es diseñar una arquitectura flexible para facilitar el mantenimiento y evolución del sistema del código. También desarrollamos habilidades en la gestión de archivos CSV complejos, mejorando nuestro manejo en el ámbito del procesamiento de datos.
 
-- **Atrasos**: Resta 1 punto al máximo posible por día de atraso (comenzando a las 00:00 del día siguiente).
-- **Grupos con más de 5 integrantes**: penalización (no se admite grupo de 6).
-- **Grupos con menos integrantes**: puede existir un pequeño bonus, según políticas de la asignatura.
-- **Arquitectura y diagrama de clases**: puede existir un pequeño bonus, según políticas de la asignatura (Diagrama de clases con cardinalidades y relaciones (herencia, composición, etc.)).
+Por último, pudimos fortalecer el trabajo en equipo respetando buenas prácticas de codificación, planificando de forma más organizada la estructura del código y utilizando colecciones para gestionar grandes volúmenes de información de la manera más eficiente posible.
 
-## 6. Ejemplo de Uso
+---
 
-```bash
-# (1) Clonar/forkear el repositorio
-git clone https://github.com/<usuario>/App2.git
+## 3. Explicación de uso de IA
 
-# (2) Compilar
-cd App2
-javac src/*.java
+### 3.1 ¿Qué tipo de ayuda proporcionó la herramienta?
 
-# (3) Ejecutar
-java src/App2 cultivos.csv
-```
+La herramienta de inteligencia artificial nos proporcionó apoyo en distintas partes del proyecto, principalmente sugiriendo mejoras en el diseño de clases, ejemplos de uso de colecciones en Java y estrategias para el manejo correcto de archivos CSV.
 
-Se mostrará un menú en consola que permitirá:
-- Listar cultivos
-- Crear/editar/eliminar un cultivo
-- Agregar/editar parcelas
-- Registrar actividades
-- Buscar cultivos/parcelas
-- etc.
+Además, resultó útil para aclarar nuestras dudas sobre buenas prácticas de programación orientada a objetos y optimizar algunos fragmentos de código, haciéndolos así más claros y eficientes.
 
-Al seleccionar "Salir", se guardarán los cambios en cultivos.csv.
+---
 
-## 7. Conclusión
+### 3.2 ¿Cómo validaron o contrastaron las sugerencias?
 
-Este App #2 busca afianzar conocimientos de POO en Java, lectura/escritura de CSV, y la correcta aplicación de principios de diseño (herencia, encapsulamiento, interfaces, composición). Aseguren una arquitectura clara, un diagrama de clases que refleje su solución, y un uso equilibrado de GIT para evidenciar la contribución de cada integrante.
+Validamos las sugerencias de la herramienta consultando la documentación oficial de Java y realizando pruebas unitarias sobre nuestro código.
+
+También analizamos en equipo cada recomendación para asegurarnos que cumpliera adecuadamente con los requisitos de la tarea.
+
+De igual modo, evaluamos su impacto en la claridad, funcionalidad y mantenibilidad del sistema antes de incorporarlas de manera definitiva.
+
+También es importante señalar que la inteligencia artificial fue empleada únicamente como un recurso de apoyo, sin reemplazar nuestro propio criterio y análisis. Cada sugerencia proporcionada por Chat GPT fue revisada de manera crítica y se complementó con nuestros conocimientos y experiencia personal.
+
